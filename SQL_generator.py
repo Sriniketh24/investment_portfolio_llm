@@ -1,9 +1,12 @@
-
+from dotenv import load_dotenv
+import os
 import google.generativeai as genai
 import mysql.connector
 import json
 
-genai.configure(api_key="AIzaSyAjF_vFrlLOtIdjIf89b2jgjFcGUbJBKvI")
+load_dotenv()
+
+genai.configure(api_key="GEMINI_API_KEY")  # replace with your key
 
 with open("investment_portfolio_documentation.json", "r") as f:
     schema = json.load(f)
@@ -41,7 +44,7 @@ try:
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Saikrish123$",
+        password="MY_SQL_ROOT_PASSWORD",
         database="investment_portfolio"
     )
     cursor = conn.cursor()
