@@ -4,7 +4,6 @@ import mysql.connector
 import json
 import re
 
-api_key = os.getenv("YOUR_GEMINI_API_KEY")
 genai.configure(api_key= "YOUR_GEMINI_API_KEY")
 with open("investment_portfolio_documentation.json", "r") as f:
     schema_text = f.read()
