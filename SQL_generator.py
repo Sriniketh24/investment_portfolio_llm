@@ -36,26 +36,3 @@ generated_sql = response.text.strip()
 
 print("User question:", user_question)
 print("\nGenerated SQL:\n", generated_sql)
-
-try:
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Saikrish123$",
-        database="investment_portfolio"
-    )
-    cursor = conn.cursor()
-
-    print("\nExecuting SQL on MySQL...")
-    cursor.execute(generated_sql)
-    rows = cursor.fetchall()
-
-    print("\nQuery Result:")
-    for row in rows:
-        print(row)
-
-    cursor.close()
-    conn.close()
-
-except mysql.connector.Error as err:
-    print("\nError executing SQL:", err)
