@@ -19,7 +19,7 @@ Demo project for generating SQL queries using the Gemini API based on an investm
   - Extracts column names used in the query
   - Compares them to actual columns in the database
   - Computes **column match accuracy %**
-  - Only executes the query if accuracy ≥ 90%, otherwise skips the query for safety
+  - Only executes the query if accuracy ≥ 75%, otherwise skips the query for safety
 
 ## Example Usage
 
