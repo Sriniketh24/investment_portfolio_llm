@@ -3,7 +3,7 @@ import google.generativeai as genai
 import mysql.connector
 import json
 
-genai.configure(api_key="AIzaSyAjF_vFrlLOtIdjIf89b2jgjFcGUbJBKvI")  # replace with your key
+genai.configure(api_key="AIzaSyAjF_vFrlLOtIdjIf89b2jgjFcGUbJBKvI")
 
 with open("investment_portfolio_documentation.json", "r") as f:
     schema = json.load(f)
