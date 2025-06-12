@@ -1,0 +1,155 @@
+{
+  "database_name": "investment_portfolio",
+  "tables": [
+    {
+      "table_name": "Users",
+      "description": "Stores information about users (investors).",
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "INT",
+          "constraints": "PRIMARY KEY, AUTO_INCREMENT",
+          "description": "Unique identifier for each user."
+        },
+        {
+          "column_name": "name",
+          "data_type": "VARCHAR(100)",
+          "description": "Full name of the user."
+        },
+        {
+          "column_name": "email",
+          "data_type": "VARCHAR(100)",
+          "description": "Email address of the user."
+        }
+      ]
+    },
+    {
+      "table_name": "Stocks",
+      "description": "Stores information about stocks available for trading.",
+      "columns": [
+        {
+          "column_name": "symbol",
+          "data_type": "VARCHAR(10)",
+          "constraints": "PRIMARY KEY",
+          "description": "Unique stock symbol (ticker)."
+        },
+        {
+          "column_name": "name",
+          "data_type": "VARCHAR(100)",
+          "description": "Full name of the company."
+        },
+        {
+          "column_name": "sector",
+          "data_type": "VARCHAR(50)",
+          "description": "Industry sector of the company."
+        }
+      ]
+    },
+    {
+      "table_name": "Holdings",
+      "description": "Tracks the current holdings (positions) of each user.",
+      "columns": [
+        {
+          "column_name": "user_id",
+          "data_type": "INT",
+          "constraints": "FOREIGN KEY REFERENCES Users(id)",
+          "description": "The user who owns this stock holding."
+        },
+        {
+          "column_name": "stock_symbol",
+          "data_type": "VARCHAR(10)",
+          "constraints": "FOREIGN KEY REFERENCES Stocks(symbol)",
+          "description": "The stock symbol of the holding."
+        },
+        {
+          "column_name": "quantity",
+          "data_type": "INT",
+          "description": "Number of shares owned."
+        },
+        {
+          "column_name": "avg_purchase_price",
+          "data_type": "DECIMAL(10,2)",
+          "description": "Average purchase price per share."
+        }
+      ],
+      "primary_key": ["user_id", "stock_symbol"]
+    },
+    {
+      "table_name": "Transactions",
+      "description": "Logs the history of buy/sell transactions performed by users.",
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "INT",
+          "constraints": "PRIMARY KEY, AUTO_INCREMENT",
+          "description": "Unique transaction ID."
+        },
+        {
+          "column_name": "user_id",
+          "data_type": "INT",
+          "constraints": "FOREIGN KEY REFERENCES Users(id)",
+          "description": "User who performed this transaction."
+        },
+        {
+          "column_name": "stock_symbol",
+          "data_type": "VARCHAR(10)",
+          "constraints": "FOREIGN KEY REFERENCES Stocks(symbol)",
+          "description": "The stock involved in the transaction."
+        },
+        {
+          "column_name": "type",
+          "data_type": "ENUM('buy', 'sell')",
+          "description": "Whether the transaction was a buy or sell."
+        },
+        {
+          "column_name": "quantity",
+          "data_type": "INT",
+          "description": "Number of shares bought or sold."
+        },
+        {
+          "column_name": "price",
+          "data_type": "DECIMAL(10,2)",
+          "description": "Price per share in this transaction."
+        },
+        {
+          "column_name": "date",
+          "data_type": "DATE",
+          "description": "Date of the transaction."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "Holdings",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": "id"
+    },
+    {
+      "from_table": "Holdings",
+      "from_column": "stock_symbol",
+      "to_table": "Stocks",
+      "to_column": "symbol"
+    },
+    {
+      "from_table": "Transactions",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": "id"
+    },
+    {
+      "from_table": "Transactions",
+      "from_column": "stock_symbol",
+      "to_table": "Stocks",
+      "to_column": "symbol"
+    }
+  ],
+  "example_questions": [
+    "List all stocks owned by Alice.",
+    "Show the total quantity of Tesla shares owned by each user.",
+    "Which users bought JPM stock?",
+    "What was the last transaction performed by Bob?",
+    "Show the portfolio of user 2 with average purchase prices."
+  ]
+}
