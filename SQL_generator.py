@@ -6,7 +6,7 @@ import json
 
 load_dotenv()
 
-genai.configure(api_key="GEMINI_API_KEY")  # replace with your key
+genai.configure(api_key="GEMINI_API_KEY")
 
 with open("investment_portfolio_documentation.json", "r") as f:
     schema = json.load(f)
